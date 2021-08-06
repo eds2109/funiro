@@ -1122,6 +1122,14 @@ window.onload = function () {
         )
       }
     }
+    if (targetElement.classList.contains('search-form__icon')) {
+      document.querySelector('.search-form').classList.toggle('_active')
+    } else if (
+      !targetElement.closest('.search-form') &&
+      document.querySelector('.search-form._active')
+    ) {
+      document.querySelector('.search-form').classList.remove('_active')
+    }
   }
 }
 
