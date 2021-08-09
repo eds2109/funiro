@@ -44,6 +44,8 @@
     color: #000;
     font-weight: 700;
     font-size: 24px;
+    position: relative;
+    z-index: 5;
     line-height: 29/24 * 100%;
   }
 
@@ -83,16 +85,33 @@
 .menu {
   flex: 0 1 420px;
   &__body {
-    @media (max-width: md3+px) {
+    @media (max-width: $md3+px) {
       position: fixed;
       width: 100%;
       height: 100%;
       overflow: auto;
       top: 0;
-      left: 0;
+      left: -100%;
       background-color: #fcf8f3;
-      transition: all 0.3s ease 0s;
+      transition: left 0.3s ease 0s;
       padding: 70px 15px 30px 15px;
+      &::before {
+        content: '';
+        position: fixed;
+        width: 100%;
+        height: 50%;
+        top: 0;
+        left: -100%;
+        transition: left 0.3s ease 0s;
+        background-color: #fcf8f3;
+        z-index: 2;
+      }
+      &._active {
+        left: 0;
+        &::before {
+          left: 0;
+        }
+      }
     }
   }
 
@@ -148,18 +167,34 @@
         }
       }
     }
+    @media (max-width: $md3+px) {
+      margin: 0 0 15px 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__link {
     font-weight: 500;
     color: inherit;
     transition: color 0.3s ease 0s;
+    @media (max-width: $md3+px) {
+      font-size: 24px;
+      font-weight: 600;
+    }
   }
 
   &__arrow {
     margin: 0 0 0 8px;
     transition: all 0.3s ease 0s;
     font-size: 12px;
+    @media (max-width: $md3+px) {
+      font-size: 14px;
+      &._active {
+        transform: rotate(-180deg);
+      }
+    }
   }
 
   &__sub-list {
@@ -179,17 +214,31 @@
       top: 100%;
       z-index: 5;
     }
+    @media (max-width: $md3+px) {
+      margin: 10px -15px 0 -15px;
+    }
   }
 
   &__sub-item {
     &:not(:last-child) {
       margin: 0 0 5px 0;
+      @media (max-width: $md3+px) {
+        margin: 0 0 10px 0;
+      }
     }
   }
 
   &__sub-link {
     color: #fff;
     line-height: 120%;
+    @media (any-hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    @media (max-width: $md3+px) {
+      font-size: 18px;
+    }
   }
 }
 .search-form {
@@ -308,9 +357,49 @@
     &__list {
     }
   }
-  .cart-list {
-  }
-  .icon-menu {
+}
+
+.cart-list {
+}
+.icon-menu {
+  display: none;
+  @media (max-width: $md3+px) {
+    @include adaptiv-value('margin-left', 32, 15, 1);
+    position: relative;
+    display: block;
+    flex: 0 0 30px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 5;
+    span {
+      transition: all 0.3s ease 0s;
+      top: calc(50% - 1px);
+      left: 0px;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #000;
+      &:first-child {
+        top: 0px;
+      }
+      &:last-child {
+        top: auto;
+        bottom: 0px;
+      }
+    }
+    &._active {
+      span {
+        transform: scale(0);
+        &:first-child {
+          transform: rotate(-45deg);
+          top: calc(50% - 1px);
+        }
+        &:last-child {
+          transform: rotate(45deg);
+          bottom: calc(50% - 1px);
+        }
+      }
+    }
   }
 }
 // Burger
