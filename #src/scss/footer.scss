@@ -129,20 +129,42 @@
   // .subscribe__title
 
   &__title {
+    margin: 0 0 16px/24px * 1em 0;
   }
 
   // .subscribe__form
 
   &__form {
+    display: flex;
+    position: relative;
   }
 
   // .subscribe__input
 
   &__input {
+    width: 100%;
+    padding: 0 12px;
+    background: #f4f5f7;
+    color: #828282;
   }
 
   // .subscribe__button
 
   &__button {
+    flex: 0 0 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: $orangeColor;
+    color: #fff;
+    transition: background-color 0.3s ease 0s;
+    margin: 0 0 0 4px;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: #be826c;
+      }
+    }
   }
 }
