@@ -15,6 +15,15 @@
     @include adaptiv-value('padding-top', 80, 30, 1);
     @include adaptiv-value('padding-bottom', 60, 30, 1);
     @include adaptiv-value('column-gap', 80, 0, 1);
+
+    @media (max-width: $md1+px) {
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr 290px;
+    }
+
+    @media (max-width: $md2+px) {
+      display: block;
+    }
   }
 
   // .footer__main
@@ -23,6 +32,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    @media (max-width: $md1+px) {
+      grid-column: span 2;
+      @include adaptiv-value('margin-bottom', 40, 30, 1);
+    }
   }
 
   // .footer__logo
@@ -49,6 +62,9 @@
   // .footer__menu
 
   &__menu {
+    @media (max-width: $md2+px) {
+      @include adaptiv-value('margin-bottom', 40, 30, 1);
+    }
   }
 
   // .footer__subscribe
@@ -92,13 +108,36 @@
     @media (min-width: $md3+px) {
       flex: 0 1 33.333%;
     }
+    @media (max-width: $md3+px) {
+      @include adaptiv-value('margin-bottom', 30, 15, 1);
+    }
   }
 
   // .menu-footer__title
 
   &__title {
     cursor: default;
-    margin: 0 0 16px/24px * 1em 0;
+    @media (min-width: $md3+px) {
+      margin: 0 0 16px/24px * 1em 0;
+    }
+    ._init &{
+      display: flex;
+      width: 100%;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+      @extend ._icon-arrow-down;
+      &::before{
+        @extend %ic;
+        font-size: 12px;
+        transition: transform .3s ease 0s;
+      }
+    }
+    &._active{
+      &::before {
+        transform: rotate(-180deg);
+      }
+    }
   }
 
   // .menu-footer__list
@@ -108,6 +147,9 @@
       &:not(:last-child) {
         margin: 0 0 15px 0;
       }
+    }
+    @media (max-width: md3+px) {
+      padding: 15px 0 0 0;
     }
   }
 
@@ -137,15 +179,14 @@
   &__form {
     display: flex;
     position: relative;
-  }
-
-  // .subscribe__input
-
-  &__input {
-    width: 100%;
-    padding: 0 12px;
-    background: #f4f5f7;
-    color: #828282;
+    .form__error {
+      position: absolute;
+      top: 100%;
+      margin: 3px 0 0 0;
+      left: 12px;
+      color: red;
+      font-size: 12px;
+    }
   }
 
   // .subscribe__button
@@ -163,8 +204,17 @@
     margin: 0 0 0 4px;
     @media (any-hover: hover) {
       &:hover {
-        background-color: #be826c;
+        background-color: #be825c;
       }
     }
+  }
+
+  // .subscribe__input
+
+  &__input {
+    width: 100%;
+    padding: 0 12px;
+    background: #f4f5f7;
+    color: #828282;
   }
 }
